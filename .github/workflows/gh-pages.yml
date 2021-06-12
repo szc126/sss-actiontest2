@@ -43,5 +43,8 @@ jobs:
           git add ${{ matrix.book }}*
           git config user.email '-'
           git config user.name 'GitHub Actions'
-          git commit -m 'Update'
-          git push --set-upstream origin gh-pages
+          if [ -n $(git status --porcelain) ]
+          then
+            git commit -m 'Update'
+            git push --set-upstream origin gh-pages
+          fi
